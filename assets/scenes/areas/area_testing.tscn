@@ -9,7 +9,7 @@ size = Vector2(128, 128)
 [node name="area_testing" type="Node2D"]
 
 [node name="PlayerGD" parent="." instance=ExtResource("2_qpct3")]
-position = Vector2(279, 390)
+position = Vector2(437, 202)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(494, 557)
