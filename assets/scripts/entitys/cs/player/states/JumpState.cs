@@ -7,12 +7,16 @@ public partial class JumpState : RefCounted, IState
     public StateMachine StateMachine { get; set; }
     private CharacterBody2D character;
 
+
     public void Enter(string prevState = "")
     {
         character = StateMachine.Owner;
-		GD.Print("Entering Jump state");
+        GD.Print("Entering Jump state");
+
         var velocity = character.Velocity;
-        velocity.Y = -400;
+        var jump_height = (int)StateMachine.GetVariable("JUMP_HEIGHT");
+
+        velocity.Y = jump_height;
         character.Velocity = velocity;
     }
 
@@ -24,23 +28,18 @@ public partial class JumpState : RefCounted, IState
     {
         float direction = Input.GetAxis("Left", "Right");
         var velocity = character.Velocity;
+        var speed = (int)StateMachine.GetVariable("SPEED");
+        var gravity = (int)StateMachine.GetVariable("GRAVITY");
 
-        velocity.Y += 980 * (float)delta;
+        velocity.Y += gravity * (float)delta;
 
-        velocity.X = direction * 200;
+        velocity.X = direction * speed;
         character.Velocity = velocity;
         character.MoveAndSlide();
 
-        if (character.IsOnFloor())
+        if (character.Velocity.Y > 0)
         {
-            if (direction != 0)
-            {
-                StateMachine.ChangeState("walk");
-            }
-            else
-            {
-                StateMachine.ChangeState("idle");
-            }
+            StateMachine.ChangeState("fall");
         }
     }
 

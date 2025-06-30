@@ -6,6 +6,7 @@ using System;
 public partial class StateMachine : RefCounted
 {
 	private Dictionary<string, RefCounted> states = new();
+	private Dictionary<string, Variant> variables = new();
 	private IState CurrentState;
 	private string CurrentStateName = "";
 	public CharacterBody2D Owner;
@@ -63,5 +64,18 @@ public partial class StateMachine : RefCounted
 	public void HandleInput(InputEvent inputEvent)
 	{
 		CurrentState?.HandleInput(inputEvent);
+	}
+
+	public void AddVariable(string name, Variant value)
+	{
+		variables[name.ToUpper()] = value;
+	}
+
+	public Variant GetVariable(string name)
+	{
+		if (variables.TryGetValue(name.ToUpper(), out var value))
+			return value;
+
+		throw new Exception($"Variable '{name}' not found.");
 	}
 }
