@@ -7,7 +7,6 @@ public partial class JumpState : RefCounted, IState
     public StateMachine StateMachine { get; set; }
     private CharacterBody2D character;
 
-
     public void Enter(string prevState = "")
     {
         character = StateMachine.Owner;

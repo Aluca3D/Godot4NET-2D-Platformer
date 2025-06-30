@@ -5,7 +5,6 @@ using System;
 public partial class WalkState : RefCounted, IState
 {
     public StateMachine StateMachine { get; set; }
-
     private CharacterBody2D character;
 
     public void Enter(string prevState = "")

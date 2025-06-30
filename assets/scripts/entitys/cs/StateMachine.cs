@@ -26,10 +26,7 @@ public partial class StateMachine : RefCounted
 	{
 		var prevStateName = CurrentStateName;
 
-		if (CurrentState != null)
-		{
-			CurrentState.Exit();
-		}
+		CurrentState?.Exit();
 
 		CurrentStateName = newStateName.ToLower();
 
@@ -74,8 +71,12 @@ public partial class StateMachine : RefCounted
 	public Variant GetVariable(string name)
 	{
 		if (variables.TryGetValue(name.ToUpper(), out var value))
+		{
 			return value;
-
-		throw new Exception($"Variable '{name}' not found.");
+		}
+		else
+		{
+			throw new Exception($"Variable '{name}' not found.");
+		}
 	}
 }

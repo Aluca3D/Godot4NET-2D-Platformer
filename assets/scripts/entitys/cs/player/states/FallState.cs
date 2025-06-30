@@ -7,7 +7,6 @@ public partial class FallState : RefCounted, IState
 	public StateMachine StateMachine { get; set; }
 	private CharacterBody2D character;
 
-
 	public void Enter(string prevState = "")
 	{
 		character = StateMachine.Owner;
@@ -18,8 +17,6 @@ public partial class FallState : RefCounted, IState
 	public void Exit() { }
 
 	public void HandleInput(InputEvent inputEvent) { }
-
-
 
 	public void PhysicsUpdate(double delta)
 	{
