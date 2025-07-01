@@ -5,9 +5,10 @@ public partial class Player : CharacterBody2D
 {
     private StateMachine stateMachine;
 
-    [Export] private int _SPEED = 400;
-    [Export] private int _JUMP_HEIGHT = -400;
-    [Export] private int _GRAVITY = 980;
+    [Export] private int _SPEED = 200;
+    [Export] private int _JUMP_HEIGHT = -200;
+    [Export] private int _GRAVITY = 800;
+    
     public override void _Ready()
     {
         stateMachine = new StateMachine();
